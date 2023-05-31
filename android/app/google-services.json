@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "14205101883",
+    "project_id": "educative-9",
+    "storage_bucket": "educative-9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14205101883:android:44de1505e6865fd610791e",
+        "android_client_info": {
+          "package_name": "com.example.educative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14205101883-bo9vf5edr614nof5stbgufsnvp7uricn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_hRJAjCsU0fAmftZ4BCszeBR5Q0xrZTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14205101883-bo9vf5edr614nof5stbgufsnvp7uricn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
