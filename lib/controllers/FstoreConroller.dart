@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:educative/Constraits/UserModel.dart';
+import 'package:educative/Datamodels/UserModel.dart';
 import 'package:educative/controllers/AuthController.dart';
 
 class FireRepo extends GetxController {

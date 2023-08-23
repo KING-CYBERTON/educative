@@ -30,7 +30,7 @@ class GetAuth extends GetxController {
       Get.offAllNamed('/login');
     } else {
       print(user.uid);
-      Get.offAllNamed('/Welcome');
+      Get.offAllNamed('/Response');
     }
   }
 
