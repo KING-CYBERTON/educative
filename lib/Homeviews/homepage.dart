@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
 
     for (var i = 0; i < events.length; i++) {
       DatabaseReference eventsref =
-          FirebaseDatabase.instance.ref().child('Events');
+          FirebaseDatabase.instance.ref().child('Event');
 
       // Use push method to generate a unique key for each event
       var newEventRef = eventsref.push();
@@ -74,20 +74,16 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-              Expanded(
+            Expanded(
               child: Container(
                 color: Colors.white10,
-            
                 child: Stack(
                   children: [
-                   // selectedIndex == 0 ? EventList() : PostList(),
-                      selectedIndex == 0 ? PostList() : EventList(),
-               
-                   ],
+                    selectedIndex == 0 ? PostList() : EventList(),
+                  ],
                 ),
               ),
             ),
-          
           ],
         ),
       ),
@@ -196,3 +192,4 @@ class MyBottomNavigationBar extends StatelessWidget {
     );
   }
 }
+

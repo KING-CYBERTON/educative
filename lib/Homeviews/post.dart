@@ -11,85 +11,92 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (post['photo'] == null) {
-      return Container(
-        width: 300,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Colors.greenAccent,
-            width: 3,
+      return Padding(
+        padding: const EdgeInsets.only(bottom:8.0),
+        child: Container(
+          width: 300,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: Colors.greenAccent,
+              width: 3,
+            ),
           ),
-        ),
-        child: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('images/splash.jpg'),
-                  )
-                ],
+          child: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      
+                      child: Icon(Icons.person),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: Text(post['captions']),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 300,
+                      child: Text(post['captions']),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     } else {
-      return Container(
-        width: 300,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Colors.greenAccent,
-            width: 3,
+      return Padding(
+        padding: const EdgeInsets.only(bottom:8.0),
+        child: Container(
+          width: 300,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: Colors.greenAccent,
+              width: 3,
+            ),
           ),
-        ),
-        child: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('images/splash.jpg'),
-                  )
-                ],
+          child: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('images/splash.jpg'),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: Text(post['captions']),
-                  ),
-                  Container(
+              Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(
                       width: 300,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(
-                              post['photo'],
-                            )),
-                      )),
-                ],
+                      child: Text(post['captions']),
+                    ),
+                    Container(
+                        width: 300,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                post['photo'],
+                              )),
+                        )),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
@@ -107,7 +114,7 @@ class PostList extends StatelessWidget {
       Query sortingbyKey = _database.child('posts').orderByKey();
 
     return FirebaseAnimatedList(
-        query: _database.child('posts'),
+        query: _database.child('Post'),
        
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {

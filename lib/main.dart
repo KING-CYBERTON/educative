@@ -16,6 +16,8 @@ import 'package:educative/controllers/AuthController.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'ResponsiveUI/Tabletscreen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
@@ -68,7 +70,9 @@ class MyApp extends StatelessWidget {
             name: '/Response',
             page: () => const ResponsiveLayout(
                 mobileScreenLayout: mobilescreenlayout(),
-                webScreenLayout: weblcreenlayout())),
+                webScreenLayout: weblcreenlayout(),
+                tabletScreenLayout: tabletscreeen()
+                )),
       ],
       initialRoute: '/',
     );

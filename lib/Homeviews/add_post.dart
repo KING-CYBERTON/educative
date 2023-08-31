@@ -1,8 +1,7 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Constraits/CustomText.dart';
-import '../controllers/StorageController.dart';
 import '../controllers/realtime_coontoller.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -15,12 +14,12 @@ class AddPost extends StatefulWidget {
   State<AddPost> createState() => _AddPostState();
 }
 
-String dropdownValue = 'Select';
+String dropdownValue = 'Post';
 
 class _AddPostState extends State<AddPost> {
   final Realtime controller = Get.find();
   final captioncontroller = TextEditingController();
-  String userid = 'kimani';
+  String? userid = FirebaseAuth.instance.currentUser?.uid;
   File? _imageFile;
   XFile? file;
   Future<void> _pickImage() async {
@@ -35,10 +34,8 @@ class _AddPostState extends State<AddPost> {
     }
   }
 
-  late String photo = '';
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent[200],
@@ -124,9 +121,10 @@ class _AddPostState extends State<AddPost> {
                       onPressed: () async {
                         String captions = captioncontroller.text.trim();
                         if (file != null) {
-                          controller.addPost(userid,file, captions);
+                          controller.addPost(
+                              userid!, file, captions, dropdownValue);
                         } else {
-                          controller.addPost2(userid, captions);
+                          controller.addPost2(userid!, captions, dropdownValue);
                         }
                       },
                       child: const Text('Publish'))
@@ -136,4 +134,159 @@ class _AddPostState extends State<AddPost> {
       ),
     );
   }
+}
+
+class AddPostDialog extends StatefulWidget {
+  const AddPostDialog({Key? key}) : super(key: key);
+
+  @override
+  State<AddPostDialog> createState() => _AddPostDialogState();
+}
+
+class _AddPostDialogState extends State<AddPostDialog> {
+  final Realtime controller = Get.find();
+  final captioncontroller = TextEditingController();
+  String? userid = FirebaseAuth.instance.currentUser?.uid;
+  final titleController = TextEditingController();
+  final detailsController = TextEditingController();
+  File? _imageFile;
+  XFile? file;
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+
+    file = await picker.pickImage(source: ImageSource.gallery);
+
+    if (file != null) {
+      setState(() {
+        _imageFile = File(file!.path);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['Post', 'Event']
+                      .map<DropdownMenuItem<String>>(
+                        (String value) => DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        ),
+                      )
+                      .toList(),
+                ),
+                if (dropdownValue == 'Event') ...[
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
+                      hintText: 'Event Title',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: detailsController,
+                    decoration: const InputDecoration(
+                      hintText: 'Event Details',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _pickImage();
+                    },
+                    child: _imageFile != null
+                        ? Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: kIsWeb
+                                ? Image.network(_imageFile!.path)
+                                : Image.file(_imageFile!))
+                        : const Icon(Icons.camera_enhance),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      String title = titleController.text.trim();
+                      String details = detailsController.text.trim();
+                      controller.addevent(
+                          userid!, file, title, details, dropdownValue);
+
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Publish'),
+                  ),
+                  const SizedBox(height: 20),
+                ] else ...[
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: captioncontroller,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter captions',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      _pickImage();
+                    },
+                    child: _imageFile != null
+                        ? Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: kIsWeb
+                                ? Image.network(_imageFile!.path)
+                                : Image.file(_imageFile!))
+                        : const Icon(Icons.camera_enhance),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      String captions = captioncontroller.text.trim();
+                      if (file != null) {
+                        controller.addPost(
+                            userid!, file, captions, dropdownValue);
+                      } else {
+                        controller.addPost2(userid!, captions, dropdownValue);
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Publish'),
+                  ),
+                  const SizedBox(height: 20),
+                ]
+              ]),
+        ),
+      ),
+    );
+  }
+}
+
+void showAddPostDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return const AddPostDialog();
+    },
+  );
 }

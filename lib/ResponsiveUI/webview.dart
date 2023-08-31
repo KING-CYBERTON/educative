@@ -1,8 +1,7 @@
-import 'package:educative/Homeviews/homepage.dart';
-import 'package:educative/ResponsiveUI/mobile.dart';
+import 'package:educative/Homeviews/events.dart';
+import 'package:educative/Homeviews/post.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'response.dart';
 
 // ignore: camel_case_types
 class weblcreenlayout extends StatefulWidget {
@@ -70,10 +69,61 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
         children: [
           Center(
             child: Container(
-                color: Colors.white,
+            
+              
                 height: double.infinity,
                 width: MediaQuery.of(context).size.width * 0.8,
-                child: HomePage(selectedIndex: selectedIndex)),
+                  decoration: BoxDecoration(
+                  image: const DecorationImage(
+                      image: AssetImage("assets/images/Splash.jpg"),
+                      fit: BoxFit.fill),
+                  color: Colors.white,),
+                child: Row(
+                  children: [
+                    Expanded(flex: 3, child:  Column(
+                        children: [
+                          const 
+                          SizedBox(height: 20,
+                          child:
+                          Text(
+                            'Forum Feeds',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 10, 10, 10),
+                                fontStyle: FontStyle.italic,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),),
+                          Expanded(child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PostList(),
+                          )),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          const 
+                          SizedBox(height: 20,
+                          child:
+                          Text(
+                            'Events',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 10, 10, 10),
+                                fontStyle: FontStyle.italic,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),),
+                          Expanded(child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: EventList(),
+                          )),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ],
       ),

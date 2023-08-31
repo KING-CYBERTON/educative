@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:educative/Homeviews/add_post.dart';
 import 'package:educative/Homeviews/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 // ignore: camel_case_types
 class mobilescreenlayout extends StatefulWidget {
@@ -15,69 +15,78 @@ class mobilescreenlayout extends StatefulWidget {
 
 // ignore: camel_case_types
 class _mobilescreenlayoutState extends State<mobilescreenlayout> {
-    int selectedIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.lightBlueAccent[200],
-          titleSpacing: 0.0,
-          centerTitle: true,
-          toolbarHeight: 60.2,
-          toolbarOpacity: 0.8,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
+        backgroundColor: Colors.lightBlueAccent[200],
+        titleSpacing: 0.0,
+        centerTitle: true,
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
           ),
-          title: Image.asset(
-                      "assets/images/logo.png",
-                      width: 14,
-                      height: 14.0,
-                    ),
-                    leading:IconButton(
-                      onPressed: () {
-                        Get.toNamed('/Profile');
-                      },
-                      icon: const Icon(Icons.person)),
-                      actions: [
-                        
-                      ] ,),
-    body: Center(
-        child: Container(
-          color: Colors.white,
-          height: double.infinity,
-          width: double.infinity,
-          child:HomePage(selectedIndex: selectedIndex)
+        ),
+        title: Image.asset(
+          "images/logo.png",
+          width: 14,
+          height: 14.0,
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Get.toNamed('/Profile');
+            },
+            icon: const Icon(Icons.person)),
+        actions: const [],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/Splash.jpg"),
+                    fit: BoxFit.fill),
+                color: Colors.white,
+              ),
+              child: HomePage(selectedIndex: selectedIndex)),
         ),
       ),
-      bottomNavigationBar:   MyBottomNavigationBar(
-              selectedIndex: selectedIndex,
-              onIndexChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-            ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: selectedIndex,
+        onIndexChanged: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+      ),
       resizeToAvoidBottomInset: false,
-      
-      floatingActionButton:      Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: FloatingActionButton(
-                          onPressed: () {
-                            Get.toNamed('/Addpost');
-                          },
-                          tooltip: 'Post',
-                          child: const Icon(Icons.add),
-                        ),
-                      ),
-                    ),
-             
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: FloatingActionButton(
+            onPressed: () {
+              //Get.toNamed('/Addpost');
+                showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AddPostDialog();
+    },
+  );
+            },
+            tooltip: 'Post',
+            child: const Icon(Icons.add),
+          ),
+        ),
+      ),
     );
   }
 }
-

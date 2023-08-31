@@ -1,6 +1,8 @@
+import 'package:educative/Homeviews/edit.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../Datamodels/event_model.dart';
 
 class EventCard extends StatelessWidget {
@@ -28,13 +30,21 @@ class EventCard extends StatelessWidget {
                 width: 2,
               ),
               image: DecorationImage(
-                image: AssetImage(
+                image: NetworkImage(
                   event['eventimage'],
                 ),
                 fit: BoxFit.fitWidth,
               ),
               borderRadius: BorderRadius.circular(16.0),
               color: Colors.white),
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            onPressed: () {
+              Get.to(EditEventPage(event: event));
+            },
+            icon: const Icon(Icons.edit)),
         ),
         Align(
           alignment: Alignment.center,
@@ -73,7 +83,7 @@ class EventList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Query sortingBychild = _database.child('Events').orderByChild('photo');
+    Query sortingBychild = _database.child('Event').orderByChild('photo');
     Query sortingbyvalue = _database.child('Events').orderByValue();
     Query sortingbyKey = _database.child('Events').orderByKey();
     return FirebaseAnimatedList(

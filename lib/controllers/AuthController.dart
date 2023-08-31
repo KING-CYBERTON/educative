@@ -9,8 +9,10 @@ class GetAuth extends GetxController {
   //late Rx<User?> _user;
   Rxn<User> fbUser = Rxn<User>();
   GoogleSignIn googleSignIn = GoogleSignIn();
+  
 
   FirebaseAuth auth = FirebaseAuth.instance;
+  
   GoogleSignInAccount? _googleAcc;
 
   @override
@@ -18,6 +20,7 @@ class GetAuth extends GetxController {
     super.onReady();
 
     fbUser = Rxn<User>(auth.currentUser);
+    
 
     fbUser.bindStream(auth.userChanges());
 
