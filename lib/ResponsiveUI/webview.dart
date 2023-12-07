@@ -3,6 +3,8 @@ import 'package:educative/Homeviews/post.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Homeviews/add_post.dart';
+
 // ignore: camel_case_types
 class weblcreenlayout extends StatefulWidget {
   const weblcreenlayout({super.key});
@@ -31,8 +33,8 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
           ),
           title: Image.asset(
             "assets/images/logo.png",
-            width: 14,
-            height: 14.0,
+            width: 90,
+            height: 90.0,
           ),
           leading: IconButton(
               onPressed: () {
@@ -69,31 +71,37 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
         children: [
           Center(
             child: Container(
-            
-              
                 height: double.infinity,
                 width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                  image: const DecorationImage(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
                       image: AssetImage("assets/images/Splash.jpg"),
                       fit: BoxFit.fill),
-                  color: Colors.white,),
+                  color: Colors.white,
+                ),
                 child: Row(
                   children: [
-                    Expanded(flex: 3, child:  Column(
+                    Expanded(
+                      flex: 3,
+                      child: Column(
                         children: [
-                          const 
-                          SizedBox(height: 20,
-                          child:
-                          Text(
-                            'Forum Feeds',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 10, 10, 10),
-                                fontStyle: FontStyle.italic,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),),
-                          Expanded(child: Padding(
+                          Container(
+                            width: double.maxFinite,
+                            color: Colors.black,
+                            child: const SizedBox(
+                              height: 20,
+                              child: Text(
+                                'Forum Feeds',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: PostList(),
                           )),
@@ -103,19 +111,25 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
                     Expanded(
                       flex: 2,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const 
-                          SizedBox(height: 20,
-                          child:
-                          Text(
-                            'Events',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 10, 10, 10),
-                                fontStyle: FontStyle.italic,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),),
-                          Expanded(child: Padding(
+                          Container(
+                            color: Colors.black,
+                            width: double.infinity,
+                            child: const SizedBox(
+                              height: 20,
+                              child: Text(
+                                'Events',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: EventList(),
                           )),
@@ -134,7 +148,12 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
           padding: const EdgeInsets.all(16.0),
           child: FloatingActionButton(
             onPressed: () {
-              Get.toNamed('/Addpost');
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AddPostDialog();
+                },
+              );
             },
             tooltip: 'Post',
             child: const Icon(Icons.add),

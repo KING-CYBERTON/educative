@@ -19,6 +19,8 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <meta name="google-signin-client_id" content="14205101883-mouor67c5ua1qruv0nm5uc1n0586ova4.apps.googleusercontent.com">
+
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -45,6 +47,7 @@
       }
       scriptLoaded = true;
       var scriptTag = document.createElement('script');
+      render = html;
       scriptTag.src = 'main.dart.js';
       scriptTag.type = 'application/javascript';
       document.body.append(scriptTag);

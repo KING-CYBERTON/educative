@@ -170,112 +170,115 @@ class _AddPostDialogState extends State<AddPostDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: <String>['Post', 'Event']
-                      .map<DropdownMenuItem<String>>(
-                        (String value) => DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        ),
-                      )
-                      .toList(),
-                ),
-                if (dropdownValue == 'Event') ...[
-                  TextField(
-                    controller: titleController,
-                    decoration: const InputDecoration(
-                      hintText: 'Event Title',
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DropdownButton<String>(
+                    value: dropdownValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items: <String>['Post', 'Event']
+                        .map<DropdownMenuItem<String>>(
+                          (String value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  if (dropdownValue == 'Event') ...[
+                    TextField(
+                      controller: titleController,
+                      decoration: const InputDecoration(
+                        hintText: 'Event Title',
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: detailsController,
-                    decoration: const InputDecoration(
-                      hintText: 'Event Details',
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: detailsController,
+                      decoration: const InputDecoration(
+                        hintText: 'Event Details',
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _pickImage();
-                    },
-                    child: _imageFile != null
-                        ? Container(
-                            width: 200,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: kIsWeb
-                                ? Image.network(_imageFile!.path)
-                                : Image.file(_imageFile!))
-                        : const Icon(Icons.camera_enhance),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      String title = titleController.text.trim();
-                      String details = detailsController.text.trim();
-                      controller.addevent(
-                          userid!, file, title, details, dropdownValue);
-
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Publish'),
-                  ),
-                  const SizedBox(height: 20),
-                ] else ...[
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: captioncontroller,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter captions',
+                    GestureDetector(
+                      onTap: () {
+                        _pickImage();
+                      },
+                      child: _imageFile != null
+                          ? Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: kIsWeb
+                                  ? Image.network(_imageFile!.path)
+                                  : Image.file(_imageFile!))
+                          : const Icon(Icons.camera_enhance),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      _pickImage();
-                    },
-                    child: _imageFile != null
-                        ? Container(
-                            width: 200,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: kIsWeb
-                                ? Image.network(_imageFile!.path)
-                                : Image.file(_imageFile!))
-                        : const Icon(Icons.camera_enhance),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      String captions = captioncontroller.text.trim();
-                      if (file != null) {
-                        controller.addPost(
-                            userid!, file, captions, dropdownValue);
-                      } else {
-                        controller.addPost2(userid!, captions, dropdownValue);
-                      }
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Publish'),
-                  ),
-                  const SizedBox(height: 20),
-                ]
-              ]),
+                    ElevatedButton(
+                      onPressed: () async {
+                        String title = titleController.text.trim();
+                        String details = detailsController.text.trim();
+                        controller.addevent(
+                            userid!, file, title, details, dropdownValue);
+      
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Publish'),
+                    ),
+                    const SizedBox(height: 20),
+                  ] else ...[
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: captioncontroller,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter captions',
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: () {
+                        _pickImage();
+                      },
+                      child: _imageFile != null
+                          ? Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: kIsWeb
+                                  ? Image.network(_imageFile!.path)
+                                  : Image.file(_imageFile!))
+                          : const Icon(Icons.camera_enhance),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        String captions = captioncontroller.text.trim();
+                        if (file != null) {
+                          controller.addPost(
+                              userid!, file, captions, dropdownValue);
+                        } else {
+                          controller.addPost2(userid!, captions, dropdownValue);
+                        }
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Publish'),
+                    ),
+                    const SizedBox(height: 20),
+                  ]
+                ]),
+          ),
         ),
       ),
     );

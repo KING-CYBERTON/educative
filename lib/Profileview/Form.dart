@@ -56,7 +56,7 @@ class _ProfileTabState extends State<ProfileTab> {
       ),
       body: Center(
         child: Container(
-          width: 350,
+          width: MediaQuery.of(context).size.width * 0.8,
           height: 600,
           decoration: BoxDecoration(
             image: const DecorationImage(

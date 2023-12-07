@@ -34,8 +34,8 @@ class _mobilescreenlayoutState extends State<mobilescreenlayout> {
         ),
         title: Image.asset(
           "images/logo.png",
-          width: 14,
-          height: 14.0,
+          width: 90,
+          height: 90.0,
         ),
         leading: IconButton(
             onPressed: () {
@@ -50,12 +50,7 @@ class _mobilescreenlayoutState extends State<mobilescreenlayout> {
           child: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/Splash.jpg"),
-                    fit: BoxFit.fill),
-                color: Colors.white,
-              ),
+
               child: HomePage(selectedIndex: selectedIndex)),
         ),
       ),
@@ -75,12 +70,12 @@ class _mobilescreenlayoutState extends State<mobilescreenlayout> {
           child: FloatingActionButton(
             onPressed: () {
               //Get.toNamed('/Addpost');
-                showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AddPostDialog();
-    },
-  );
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AddPostDialog();
+                },
+              );
             },
             tooltip: 'Post',
             child: const Icon(Icons.add),

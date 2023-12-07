@@ -2,6 +2,8 @@ import 'package:educative/Homeviews/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Homeviews/add_post.dart';
+
 // ignore: camel_case_types
 class tabletscreeen extends StatefulWidget {
   const tabletscreeen({super.key});
@@ -30,8 +32,8 @@ class _tabletscreeenState extends State<tabletscreeen> {
           ),
           title: Image.asset(
             "assets/images/logo.png",
-            width: 14,
-            height: 14.0,
+            width: 90,
+            height: 90.0,
           ),
           leading: IconButton(
               onPressed: () {
@@ -73,11 +75,7 @@ class _tabletscreeenState extends State<tabletscreeen> {
                   
                   height: double.infinity,
                   width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/Splash.jpg"),
-                        fit: BoxFit.fill),
-                    color: Colors.white,),
+       
                   child: HomePage(selectedIndex: selectedIndex)
                   ),
             ),
@@ -91,7 +89,12 @@ class _tabletscreeenState extends State<tabletscreeen> {
           padding: const EdgeInsets.all(16.0),
           child: FloatingActionButton(
             onPressed: () {
-              Get.toNamed('/Addpost');
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AddPostDialog();
+                },
+              );
             },
             tooltip: 'Post',
             child: const Icon(Icons.add),

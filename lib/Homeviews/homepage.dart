@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
   bool showFeedButton = false;
   bool showEventsButton = false;
 
-  final real = Get.put(Realtime());
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: Container(
-                color: Colors.white10,
+                              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/Splash.jpg"),
+                    fit: BoxFit.fill),
+                color: Colors.white,
+              ),
                 child: Stack(
                   children: [
                     selectedIndex == 0 ? PostList() : EventList(),

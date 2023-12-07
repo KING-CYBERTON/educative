@@ -21,6 +21,7 @@ class PostCard extends StatelessWidget {
               color: Colors.greenAccent,
               width: 3,
             ),
+            color: Colors.white.withOpacity(0.9)
           ),
           child: Row(
             children: [
@@ -54,6 +55,7 @@ class PostCard extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(bottom:8.0),
         child: Container(
+
           width: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -61,6 +63,7 @@ class PostCard extends StatelessWidget {
               color: Colors.greenAccent,
               width: 3,
             ),
+            color: Colors.white.withOpacity(0.5)
           ),
           child: Row(
             children: [
@@ -76,23 +79,25 @@ class PostCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: Text(post['captions']),
-                    ),
-                    Container(
+                child: Container(
+                  child: Column(
+                    children: [
+                      SizedBox(
                         width: 300,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                post['photo'],
-                              )),
-                        )),
-                  ],
+                        child: Text(post['captions']),
+                      ),
+                      Container(
+                          width: 300,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  post['photo'],
+                                )),
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ],
