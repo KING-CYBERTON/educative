@@ -24,12 +24,13 @@ void main() async {
     await GoogleSignIn().signInSilently();
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: "AIzaSyAmOB_-8DIEIwJEOvrM2a8C6RE-KbvSDDc",
-          projectId: "educative-9",
-          storageBucket: "educative-9.appspot.com",
-          databaseURL: "https://educative-9-default-rtdb.firebaseio.com",
-          messagingSenderId: "14205101883",
-          appId: "1:14205101883:web:7c0db5d88bc2dc0310791e"),
+        apiKey: "AIzaSyBSzL-jgsMsuv7xbqwLqZQ7Q0N4ENQzgPc",
+        projectId: "test-f8da9",
+        storageBucket: "test-f8da9.appspot.com",
+        databaseURL: "https://test-f8da9-default-rtdb.firebaseio.com",
+        messagingSenderId: "221472767325",
+        appId: "1:221472767325:web:e4052c592d2910a9577cb4",
+      ),
     ).then((value) => Get.put(GetAuth()));
     runApp(const MyApp());
   } else {
@@ -41,7 +42,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
-        
       ),
       getPages: [
         GetPage(name: '/', page: () => const SplashScreen()),
@@ -58,21 +58,19 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/signup', page: () => const SignUpPage()),
         GetPage(name: '/Profile', page: () => UserProfileScreen()),
         GetPage(name: '/Welcome', page: () => WelcomePage()),
-         GetPage(name: '/Addpost', page: () => const AddPost()),
+        GetPage(name: '/Addpost', page: () => const AddPost()),
         GetPage(name: '/Form', page: () => const ProfileTab()),
         GetPage(
             name: '/Homepage',
             page: () => const HomePage(
                   selectedIndex: 0,
                 )),
-       
         GetPage(
             name: '/Response',
             page: () => const ResponsiveLayout(
                 mobileScreenLayout: mobilescreenlayout(),
                 webScreenLayout: weblcreenlayout(),
-                tabletScreenLayout: tabletscreeen()
-                )),
+                tabletScreenLayout: tabletscreeen())),
       ],
       initialRoute: '/',
     );

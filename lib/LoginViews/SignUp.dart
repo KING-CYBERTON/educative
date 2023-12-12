@@ -18,9 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Tree Life'),
-        ),
+    
         body: SafeArea(
             child: Center(
           child: Container(

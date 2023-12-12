@@ -32,8 +32,9 @@ class EventCard extends StatelessWidget {
               image: DecorationImage(
                 image: NetworkImage(
                   event['eventimage'],
+               
                 ),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               ),
               borderRadius: BorderRadius.circular(16.0),
               color: Colors.white),
@@ -87,7 +88,7 @@ class EventList extends StatelessWidget {
     Query sortingbyvalue = _database.child('Events').orderByValue();
     Query sortingbyKey = _database.child('Events').orderByKey();
     return FirebaseAnimatedList(
-        query: sortingBychild.limitToLast(10),
+        query: sortingbyKey,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
           Map Event = snapshot.value as Map;

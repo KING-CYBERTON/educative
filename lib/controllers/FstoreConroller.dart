@@ -10,6 +10,7 @@ class FireRepo extends GetxController {
 
   final _db = FirebaseFirestore.instance;
   final uid = FirebaseAuth.instance.currentUser?.uid;
+    final email = FirebaseAuth.instance.currentUser?.email;
 
   createUser(UserData user) async {
     await _db
@@ -27,8 +28,47 @@ class FireRepo extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.2),
           colorText: Colors.black);
     });
-    Get.toNamed('/Homescreen');
   }
+
+  editUser(UserData user) async {
+  // Get the current user's email
+  final currentUserEmail = FirebaseAuth.instance.currentUser?.email;
+
+  // Check if the user is authenticated
+  if (currentUserEmail != null) {
+    // Query the Users collection based on the email field
+    QuerySnapshot querySnapshot = await _db
+        .collection("Users")
+        .where("email", isEqualTo: currentUserEmail)
+        .get();
+
+    // Check if a document with the specified email exists
+    if (querySnapshot.docs.isNotEmpty) {
+      // Get the document reference
+      DocumentReference documentReference = querySnapshot.docs.first.reference;
+
+      // Update the document
+      await documentReference.update(user.toJson());
+
+      Get.snackbar('Success', 'Info has been updated',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.greenAccent.withOpacity(0.2),
+          colorText: Colors.black87);
+    } else {
+      // Handle the case when no document is found
+      Get.snackbar('Error', 'User document not found',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.redAccent.withOpacity(0.2),
+          colorText: Colors.black);
+    }
+  } else {
+    // Handle the case when the user is not authenticated
+    Get.snackbar('Error', 'User not authenticated',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.redAccent.withOpacity(0.2),
+        colorText: Colors.black);
+  }
+}
 
   Future<UserData> getUserData(String email) async {
     final snapshot =
@@ -45,14 +85,4 @@ class FireRepo extends GetxController {
         snapshot.docs.map((e) => UserData.fromSnapshot(e)).toList();
     return userdetails;
   }
-
-  // Future<Map<String, dynamic>> getPeriodData(String email) async {
-  //   final userData = await FireRepo.instance.getUserData(email.toString());
-  //   final periodData = {
-  //     'startDate': userData.startDate,
-  //     'periodLength': userData.periodLength,
-  //     'periodCycle': userData.periodCycle,
-  //   };
-  //   return periodData;
-  // }
 }

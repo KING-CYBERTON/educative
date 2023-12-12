@@ -117,7 +117,7 @@ class Realtime extends GetxController {
 
   void addevent(String userId,XFile? file, String title ,
   String details, String dataNode) async {
-        if (file == null) return;
+        if (file == null) return ;
     //step 4 create unique name for image
     String imageName = DateTime.now().microsecondsSinceEpoch.toString();
 

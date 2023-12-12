@@ -114,12 +114,12 @@ class PostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Query sortingBychild = _database.child('posts').orderByChild('photo');
-     Query sortingbyvalue= _database.child('posts').orderByValue();
-      Query sortingbyKey = _database.child('posts').orderByKey();
+    Query sortingBychild = _database.child('Post').orderByChild('photo');
+     Query sortingbyvalue= _database.child('Post').orderByValue();
+      Query sortingbyKey = _database.child('Post').orderByKey();
 
     return FirebaseAnimatedList(
-        query: _database.child('Post'),
+        query: sortingbyKey,
        
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {

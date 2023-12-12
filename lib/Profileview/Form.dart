@@ -42,16 +42,16 @@ class _ProfileTabState extends State<ProfileTab> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.greenAccent[200],
-          titleSpacing: 0.0,
-          centerTitle: true,
-          toolbarHeight: 65.2,
-          toolbarOpacity: 0.8,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
+        titleSpacing: 0.0,
+        centerTitle: true,
+        toolbarHeight: 65.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
           ),
+        ),
         title: const Text('Profile'),
       ),
       body: Center(
@@ -201,7 +201,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                         onPressed: () {
-                          if (!_formKey.currentState!.validate()) return;
+                        
 
                           final email =
                               FirebaseAuth.instance.currentUser?.email;

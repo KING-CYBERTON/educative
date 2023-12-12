@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
@@ -8,6 +10,7 @@ class UserData {
   String biography;
   int no_of_trees;
   String? email;
+  
 
   UserData({
     this.id,
@@ -21,6 +24,7 @@ class UserData {
 
   toJson() {
     return {
+  
       'email': email,
       'username': username,
       'age': age,

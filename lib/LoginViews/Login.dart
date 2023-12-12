@@ -21,9 +21,7 @@ class _LoginInPageState extends State<LoginInPage> {
     //GetAuth controller = Get.put(GetAuth());
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: const Text('Tree Life'),
-        ),
+     
         body: SafeArea(
             child: Center(
           child: Container(

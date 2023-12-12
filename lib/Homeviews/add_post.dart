@@ -50,7 +50,7 @@ class _AddPostState extends State<AddPost> {
           ),
         ),
         title: const CircleAvatar(
-          backgroundImage: AssetImage('images/splash.jpg'),
+          backgroundImage: AssetImage('assets/images/splash.jpg'),
         ),
       ),
       body: Center(
@@ -120,11 +120,23 @@ class _AddPostState extends State<AddPost> {
                   ElevatedButton(
                       onPressed: () async {
                         String captions = captioncontroller.text.trim();
-                        if (file != null) {
-                          controller.addPost(
-                              userid!, file, captions, dropdownValue);
+
+                        if (captions.isNotEmpty) {
+                          if (file != null) {
+                            controller.addPost(
+                                userid!, file, captions, dropdownValue);
+                          } else {
+                            controller.addPost2(
+                                userid!, captions, dropdownValue);
+                          }
                         } else {
-                          controller.addPost2(userid!, captions, dropdownValue);
+                          Get.snackbar(
+                            'Error',
+                            'Please add a caption',
+                            snackPosition: SnackPosition.TOP,
+                            backgroundColor: Colors.redAccent.withOpacity(0.2),
+                            colorText: Colors.black,
+                          );
                         }
                       },
                       child: const Text('Publish'))
@@ -229,10 +241,12 @@ class _AddPostDialogState extends State<AddPostDialog> {
                       onPressed: () async {
                         String title = titleController.text.trim();
                         String details = detailsController.text.trim();
-                        controller.addevent(
-                            userid!, file, title, details, dropdownValue);
-      
-                        Navigator.of(context).pop();
+              
+                          controller.addevent(
+                              userid!, file, title, details, dropdownValue);
+
+                          Navigator.of(context).pop();
+                       
                       },
                       child: const Text('Publish'),
                     ),
@@ -265,13 +279,25 @@ class _AddPostDialogState extends State<AddPostDialog> {
                     ElevatedButton(
                       onPressed: () async {
                         String captions = captioncontroller.text.trim();
-                        if (file != null) {
-                          controller.addPost(
-                              userid!, file, captions, dropdownValue);
+                        if (captions.isNotEmpty) {
+                          if (file != null) {
+                            controller.addPost(
+                                userid!, file, captions, dropdownValue);
+                            Navigator.of(context).pop();
+                          } else {
+                            controller.addPost2(
+                                userid!, captions, dropdownValue);
+                            Navigator.of(context).pop();
+                          }
                         } else {
-                          controller.addPost2(userid!, captions, dropdownValue);
+                          Get.snackbar(
+                            'Error',
+                            'Please add a caption',
+                            snackPosition: SnackPosition.TOP,
+                            backgroundColor: Colors.redAccent.withOpacity(0.5),
+                            colorText: Colors.black,
+                          );
                         }
-                        Navigator.of(context).pop();
                       },
                       child: const Text('Publish'),
                     ),
