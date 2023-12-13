@@ -73,7 +73,7 @@ class PostCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('images/splash.jpg'),
+                      backgroundImage: AssetImage('assets/images/splash.jpg'),
                     )
                   ],
                 ),

@@ -18,17 +18,17 @@ class Event {
         userid: 'kimani', 
         eventtitle: 'treeplanting',
         eventdetails: 'save the world',
-        eventimage: 'images/tree.jpg'),
+        eventimage: 'assetsimages/tree.jpg'),
     Event(
         userid: 'kimani2',
         eventtitle: 'treeplanting2',
         eventdetails: 'save the world2',
-        eventimage: 'images/tree.jpg'),
+        eventimage: 'assets/images/tree.jpg'),
     Event(
         userid: 'kimani3',
         eventtitle: 'treeplanting3',
         eventdetails: 'save the world3',
-        eventimage: 'images/tree.jpg'),
+        eventimage: 'assets/images/tree.jpg'),
   ];
 }
 
@@ -57,7 +57,7 @@ class Post {
     Post(
         userid: 'Wambui2',
         captions: 'Lets make it green',
-        photo: 'images/logo.png'),
+        photo: 'assets/images/logo.png'),
     Post(userid: 'Wambui3', captions: 'World wide ecosystem')
   ];
 }

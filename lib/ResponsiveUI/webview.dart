@@ -20,53 +20,28 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.greenAccent[200],
-          titleSpacing: 0.0,
-          centerTitle: true,
-          toolbarHeight: 65.2,
-          toolbarOpacity: 0.8,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
+        backgroundColor: Colors.greenAccent[200],
+        titleSpacing: 0.0,
+        centerTitle: true,
+        toolbarHeight: 65.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
           ),
-          title: Image.asset(
-            "assets/images/logo.png",
-            width: 90,
-            height: 90.0,
-          ),
-          leading: IconButton(
-              onPressed: () {
-                Get.toNamed('/Profile');
-              },
-              icon: const Icon(Icons.person)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 0;
-                });
-              },
-              icon: const Icon(Icons.padding_outlined),
-              color: selectedIndex == 0
-                  ? Colors.lightBlueAccent[200]
-                  : Colors.white,
-              tooltip: 'Posts',
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 1;
-                });
-              },
-              icon: const Icon(Icons.event_available),
-              color: selectedIndex == 1
-                  ? Colors.lightBlueAccent[200]
-                  : Colors.white,
-              tooltip: 'Events',
-            ),
-          ]),
+        ),
+        title: Image.asset(
+          "assets/images/logo.png",
+          width: 90,
+          height: 90.0,
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Get.toNamed('/Profile');
+            },
+            icon: const Icon(Icons.person)),
+      ),
       body: Stack(
         children: [
           Center(

@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:educative/Profileview/Formedit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -214,23 +212,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                               ),
                               const SizedBox(height: 20.0),
-                              ElevatedButton(
-                                onPressed: () {
-                                  final email =
-                                      FirebaseAuth.instance.currentUser?.email;
-                                  final user = UserData(
-                                    email: email.toString(),
-                                    username: _UsernameController.text.trim(),
-                                    age: int.parse(_AgeController.text.trim()),
-                                    no_of_trees:
-                                        int.parse(_NTPController.text.trim()),
-                                    region: _RegionController.text.trim(),
-                                    biography: _BioController.text.trim(),
-                                  );
-                                  print(userData.id);
-                                  repo.editUser(user);
-                                },
-                                child: const Text('Save'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      final email = FirebaseAuth
+                                          .instance.currentUser?.email;
+                                      final user = UserData(
+                                        email: email.toString(),
+                                        username:
+                                            _UsernameController.text.trim(),
+                                        age: int.parse(
+                                            _AgeController.text.trim()),
+                                        no_of_trees: int.parse(
+                                            _NTPController.text.trim()),
+                                        region: _RegionController.text.trim(),
+                                        biography: _BioController.text.trim(),
+                                      );
+                                      print(userData.id);
+                                      repo.editUser(user);
+                                    },
+                                    child: const Text('Save'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        edit = false;
+                                      });
+                                    },
+                                    child: const Text('Back'),
+                                  ),
+                                ],
                               ),
                             ])
                           : Column(
