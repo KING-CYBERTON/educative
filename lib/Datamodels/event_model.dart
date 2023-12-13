@@ -11,7 +11,7 @@ class Event {
     required this.eventdetails,
     required this.eventimage,
   });
- 
+  
 
   static List<Event> events = [
     Event(
