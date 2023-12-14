@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Datamodels/event_model.dart';
+import '../controllers/realtime_coontoller.dart';
 
 class EventCard extends StatelessWidget {
   final Map event;
@@ -11,6 +12,7 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Realtime controller = Get.find();
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
       child: Stack(children: [
@@ -32,7 +34,6 @@ class EventCard extends StatelessWidget {
               image: DecorationImage(
                 image: NetworkImage(
                   event['eventimage'],
-               
                 ),
                 fit: BoxFit.fill,
               ),
@@ -42,10 +43,13 @@ class EventCard extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: IconButton(
-            onPressed: () {
-              Get.to(EditEventPage(event: event));
-            },
-            icon: const Icon(Icons.edit)),
+              onPressed: () {
+                String eventId = event['key'];
+                String dataNode = 'Event';
+                controller.deleteEvent(dataNode, eventId);
+              },
+              icon: const Icon(Icons.delete,
+              color: Colors.red,)),
         ),
         Align(
           alignment: Alignment.center,
@@ -85,8 +89,8 @@ class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Query sortingBychild = _database.child('Event').orderByChild('photo');
-    Query sortingbyvalue = _database.child('Events').orderByValue();
-    Query sortingbyKey = _database.child('Events').orderByKey();
+    Query sortingbyvalue = _database.child('Event').orderByValue();
+    Query sortingbyKey = _database.child('Event').orderByKey();
     return FirebaseAnimatedList(
         query: sortingbyKey,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,

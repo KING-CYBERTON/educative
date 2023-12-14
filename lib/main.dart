@@ -24,12 +24,12 @@ void main() async {
     await GoogleSignIn().signInSilently();
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "{{API_Key}}",
-        projectId: "{{projectId}}",
-        storageBucket: "{{storageBucket}}",
-        databaseURL: "{{databaseURL}}",
-        messagingSenderId: "{{messagingSenderId}}",
-        appId: "{{appId}}",
+        apiKey: "AIzaSyBSzL-jgsMsuv7xbqwLqZQ7Q0N4ENQzgPc",
+        projectId: "test-f8da9",
+        storageBucket: "test-f8da9.appspot.com",
+        databaseURL: "https://test-f8da9-default-rtdb.firebaseio.com",
+        messagingSenderId: "221472767325",
+        appId: "1:221472767325:web:e4052c592d2910a9577cb4",
       ),
     ).then((value) => Get.put(GetAuth()));
     runApp(const MyApp());

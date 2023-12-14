@@ -10,15 +10,15 @@ import '../controllers/realtime_coontoller.dart';
 
 class EditEventPage extends StatefulWidget {
   final Map event;
-  EditEventPage({required this.event});
+  const EditEventPage({super.key, required this.event});
 
   @override
   _EditEventPageState createState() => _EditEventPageState();
 }
 
 class _EditEventPageState extends State<EditEventPage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _detailsController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
   final captioncontroller = TextEditingController();
   String? userid = FirebaseAuth.instance.currentUser?.uid;
   File? _imageFile;
@@ -36,7 +36,7 @@ class _EditEventPageState extends State<EditEventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Event'),
+        title: const Text('Edit Event'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,21 +44,39 @@ class _EditEventPageState extends State<EditEventPage> {
           children: [
             TextFormField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: 'Event Title'),
+              decoration: const InputDecoration(labelText: 'Event Title'),
             ),
             TextFormField(
               controller: _detailsController,
-              decoration: InputDecoration(labelText: 'Event Details'),
+              decoration: const InputDecoration(labelText: 'Event Details'),
             ),
             // Add other form fields or widgets here
-            ElevatedButton(
-              onPressed: () {
-                controller.editevent(userid!, file, _titleController.text,
-                    widget.event['key'], _detailsController.text, 'Event');
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    controller.editevent(userid!, file, _titleController.text,
+                        widget.event['key'], _detailsController.text, 'Event');
 
-                Navigator.pop(context);
-              },
-              child: Text('Save Changes'),
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Save Changes'),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                    String eventId = widget.event['key'];
+                    String dataNode = 'Event';
+                    controller.deleteEvent(dataNode, eventId);
+
+                  
+                  },
+                  child: const Text('Delete'),
+                ),
+              ],
             ),
           ],
         ),

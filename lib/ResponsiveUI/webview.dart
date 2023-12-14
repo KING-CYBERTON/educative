@@ -64,7 +64,7 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
                             width: double.maxFinite,
                             color: Colors.black,
                             child: const SizedBox(
-                              height: 20,
+                              height: 30,
                               child: Text(
                                 'Forum Feeds',
                                 style: TextStyle(
@@ -92,7 +92,7 @@ class _weblcreenlayoutState extends State<weblcreenlayout> {
                             color: Colors.black,
                             width: double.infinity,
                             child: const SizedBox(
-                              height: 20,
+                              height: 30,
                               child: Text(
                                 'Events',
                                 style: TextStyle(
