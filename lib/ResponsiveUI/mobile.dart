@@ -33,7 +33,7 @@ class _mobilescreenlayoutState extends State<mobilescreenlayout> {
           ),
         ),
         title: Image.asset(
-          "images/logo.png",
+          "assets/images/logo.png",
           width: 90,
           height: 90.0,
         ),
